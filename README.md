@@ -2,8 +2,8 @@
 
 **To run code**: 
 ```
-gcc/g++ <filename>  -pthread
-./a.out
+cargo build
+cargo run
 ```
 
 **Problem 1: The Birthday Presents Party**
