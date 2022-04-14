@@ -1,5 +1,3 @@
-#include <iostream>
-#include <thread>
 #include <mutex>
 
 class Node {
@@ -133,20 +131,31 @@ class FineList {
             if (isEmpty()) {
                 return false;
             }
+            lock.lock();
             // Start @ head
             Node *cur = head;
+            Node *old_cur;
             // Place lock on cur
             if (cur) {
                 cur->lock.lock();
             }
+
+            lock.unlock();
             // Loop through list, 
             // checking for value
             while (cur) {
                 if (cur->value == val) {
                     // Release lock
                     cur->lock.unlock();
+                    // delete old_cur;
+                    delete cur;
                     return true;
                 }
+                // Keep looping
+                old_cur = cur;
+                cur = cur->next;
+                old_cur->lock.unlock();
+                cur->lock.lock();
             }
             // Value not found in 
             // list, release lock

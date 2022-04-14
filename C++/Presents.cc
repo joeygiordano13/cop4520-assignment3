@@ -3,12 +3,11 @@
 #include <random>
 #include <thread>
 #include <algorithm>
-#include <iterator>
 #include <iostream>
 #include <vector>
 #include <fstream>
 
-#define NUM_PRESENTS 50
+#define NUM_PRESENTS 500000
 #define NUM_SERVANTS 4
 
 void performServantTask(FineList *list, SafeVector *remainingGifts, SafeVector *processedGifts) {
@@ -19,6 +18,7 @@ void performServantTask(FineList *list, SafeVector *remainingGifts, SafeVector *
             // Minotaur wants to add a new present
             // to linked list
             case 0: {
+                //std::cout << "task 1" << std::endl;
                 if (remainingGifts->size() <= 0) {
                     continue;
                 }
@@ -34,6 +34,7 @@ void performServantTask(FineList *list, SafeVector *remainingGifts, SafeVector *
             // Minotaur wants servants to write 
             // a thank you card
             case 1: {
+                //std::cout << "task 2" << std::endl;
                 // Thank you card cannot be written
                 if (list->isEmpty() || processedGifts->size() <= 0) {
                     continue;
@@ -53,9 +54,9 @@ void performServantTask(FineList *list, SafeVector *remainingGifts, SafeVector *
             // Minotaur wants to check if present
             // is in linked list
             case 2: {
+                //std::cout << "task 3" << std::endl;
                 unsigned int minotaurRequestedTag = std::rand() % NUM_PRESENTS;
                 bool inList = list->contains(minotaurRequestedTag);
-
                 // Print result for minotaur
                 std::cout << "Guest tag #" << minotaurRequestedTag 
                             << (inList ? " is" : " is not")

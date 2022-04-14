@@ -2,8 +2,6 @@
 #include <vector>
 #include <random>
 #include <algorithm>
-#include <iterator>
-#include <iostream>
 
 class SafeVector {
     private:
@@ -11,7 +9,6 @@ class SafeVector {
         std::vector<unsigned int> vec = std::vector<unsigned int>();
     public:
         SafeVector(unsigned int size) {
-            lock.unlock();
             // Create vector with tags 1->N
             for (int n = 0; n < size; n++) {
                 vec.push_back(n);
@@ -31,6 +28,7 @@ class SafeVector {
             lock.lock();
             vec.push_back(val);
             lock.unlock();
+            return;
         }
 
         unsigned int pop() {
