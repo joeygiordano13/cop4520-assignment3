@@ -1,10 +1,41 @@
 # cop4520-assignment3
 
-**To run code**: 
-```
-cargo build
-cargo run
-```
+# Minotaur Party and Temperature Tracking Module
+
+**Homework Assignment 3 - Joseph Giordano**
+
+_Compile & Execution Instructions_:
+
+## **OSX**
+cd C++
+
+g++ Presents.cc -std=c++11
+
+./a.out
+
+---
+
+## **Linux**
+cd C++
+
+g++ Presents.cc -std=c++11 -pthread
+
+./a.out
+
+---
+
+_Summary_:
+
+
+_Reasoning for Efficiency and Correctness_:
+
+_Experimental Results_:
+| # Threads | ~ Runtime (sec) |
+| --------- | :-------------: |
+| 1         |       x         |
+| 2         |       x         |
+| 4         |       x         |
+| 8         |       x         |
 
 **Problem 1: The Birthday Presents Party**
 
