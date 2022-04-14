@@ -3,29 +3,37 @@
 #include <mutex>
 
 class Node {
-    private:
+    public:
         unsigned int value;
         Node *next;
         std::mutex lock; // lock each node
-
+        
         Node(int val) {
             value = val;
             next = NULL;
+            lock.unlock();
         }
-}
+};
 
-class FineGrainedList {
+class FineList {
     private:
         Node *head;
         std::mutex lock;
     public:
+        // Constructor
+        FineList() {
+            head = NULL;
+            lock.unlock();
+        }
         // Insert method
         void insert(unsigned int val) {
             // Create new node
-            Node *newNode = Node(val);
+            Node *newNode = new Node(val);
             // Check if list is empty
             if (isEmpty()) {
+                lock.lock();
                 head = newNode;
+                lock.unlock();
                 return;
             }
             // Start @ head
@@ -136,13 +144,13 @@ class FineGrainedList {
             while (cur) {
                 if (cur->value == val) {
                     // Release lock
-                    cur->unlock();
+                    cur->lock.unlock();
                     return true;
                 }
             }
             // Value not found in 
             // list, release lock
-            cur->unlock();
+            cur->lock.unlock();
             return false;
         }
-}
+};
